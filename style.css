@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Signika:wght@400;700&family=Varela+Round&display=swap");
+
+* {
+  font-family: "Bebas Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1 {
+  text-align: center;
+  font-size: 5em;
+  color: #f3a36d;
+  text-shadow: 0 0px 4px #bd8f70;
+}
+
+.game-mode {
+  display: flex;
+  justify-content: center;
+}
+.game-mode button {
+  margin: 0 3em auto;
+  border: 2px solid #f3a36d;
+  padding: 0.5rem;
+  box-shadow: 0 2px #f3a36d;
+  background-color: transparent;
+  color: #f3a36d;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.35s;
+  font-size: 1.5em;
+}
+.game-mode button:hover,
+.game-mode .mode-selected {
+  box-shadow: 0 10px 5px #f3a36d;
+  background-color: #f3a36d;
+  color: white;
+}
+
+.disabled {
+  background-color: #d4baa8 !important;
+  box-shadow: none !important;
+  color: white !important;
+}
+
+.pp {
+  margin: 1em auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 1em;
+  row-gap: 1em;
+  text-align: center;
+  font-size: 1.5em;
+}
+.pp input {
+  border: none;
+  border-bottom: solid 2px #51509b;
+}
+input:focus {
+  outline: none;
+}
+
+.player {
+  color: #00b0ff;
+}
+.mark {
+  color: #51509b;
+}
+
+.play {
+  margin: 1em auto;
+  font-size: 2em;
+  box-shadow: 0 10px 5px #f3a36d;
+  background-color: #f3a36d;
+  color: white;
+  border: none;
+  padding: 0.125em 0.5em;
+  cursor: pointer;
+}
+.playground {
+  width: 150px;
+  height: 150px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+}
+.box {
+  width: 50px;
+  height: 50px;
+  border: red 1px solid;
+}
+
+.player-names {
+  font: 1.5em sans-serif;
+  margin-top: 1em;
+  display: flex;
+  width: 150px;
+  justify-content: space-between;
+}
