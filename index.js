@@ -1,71 +1,89 @@
-const pvp = document.querySelector("#PVP");
-const choosePlayer = document.querySelector(".pp");
-const x = document.querySelector("#x");
-const o = document.querySelector("#o");
-let playerX;
-let playerO;
-const play = document.querySelector(".play");
-let place1, place2, place3, place4, place5, place6, place7, place8, place9;
-let array = [
-  place1,
-  place2,
-  place3,
-  place4,
-  place5,
-  place6,
-  place7,
-  place8,
-  place9,
-];
+//Defining the game mode buttons
+let pvp = document.querySelector("#PVP");
+let pva = document.querySelector("#PVA");
 
-const modeBtns = document.querySelectorAll(".mode-btn");
-const modebtnsitems = [].slice.call(modeBtns);
-console.log(modebtnsitems);
+//Defining the player names in game modes
+let pvpSection = document.querySelector(".pp");
+let xPVPInput = document.querySelector("#x");
+let oPVPInput = document.querySelector("#o");
 
-modebtnsitems.forEach(function (item) {
-  item.addEventListener("click", function () {
-    modebtnsitems.forEach((item) => {
-      item.classList.remove("mode-selected");
-    });
-    item.classList.toggle("mode-selected");
-    let i = modebtnsitems.indexOf(item);
-    switch (i) {
-      case 0:
-        choosePlayer.style.display = "grid";
-        play.style.display = "block";
-        break;
-      case 1:
-        console.log("You pressed on PVA");
-        break;
-      case 2:
-        console.log("you pressed on AVA");
-        break;
-      default:
-        choosePlayer.style.display = "grid";
-    }
-  });
+let pvaSection = document.querySelector(".pa");
+
+//Defining the play button
+let play = document.querySelector(".play");
+
+//Defining the gameboard
+let gameBoard = document.querySelector(".game-board");
+
+//Choose game mode
+pvp.addEventListener("click", function () {
+  //sections of each button appear
+  pvpSection.style.display = "grid";
+  pvaSection.style.display = "none";
+
+  //give the selected button its visuals
+  pvp.classList.add("mode-selected");
+  pva.classList.remove("mode-selected");
+});
+pva.addEventListener("click", function () {
+  //sections of each button appear
+  pvpSection.style.display = "none";
+  pvaSection.style.display = "block";
+
+  //give the selected button its visuals
+  pvp.classList.remove("mode-selected");
+  pva.classList.add("mode-selected");
 });
 
-pvp.addEventListener("click", function () {});
+//Factrory for the gameboard
+let turn = 3;
+let box = (id) => {
+  //created the element
+  let create = document
+    .querySelector(".game-board")
+    .appendChild(document.createElement("div"));
+  create.classList.add("box");
+  create.id = `box-${id}`;
 
+  //what will happen when you click on the box
+  let clicking = create.addEventListener("click", function () {
+    //check if it was previosly clicked
+    if (!create.classList.contains("played")) {
+      //check what turn so if odd => "X", else "O"
+      if (turn % 2 == 1) {
+        create.textContent = "X";
+        turn++;
+      } else {
+        create.textContent = "O";
+        turn++;
+      }
+      //add "played" to classlist
+      create.classList.add("played");
+    }
+  });
+  return { clicking };
+};
+
+//Start game
 play.addEventListener("click", function () {
-  playerX = x.value;
-  playerO = o.value;
-  document.querySelector(".player-x").textContent = x.value + "   X";
-  document.querySelector(".player-o").textContent = o.value + "   O";
+  //Get the name of players
+  let x = xPVPInput.value;
+  let o = oPVPInput.value;
 
-  choosePlayer.style.display = "none";
-  play.style.display = "none";
-  modebtnsitems.forEach((item) => (item.style.display = "none"));
+  if (x.trim() !== "" || o.trim() !== "") {
+    document.querySelector(".player-x").textContent = x;
+    document.querySelector(".player-o").textContent = o;
 
-  let playground = document.createElement("section");
-  playground.classList.add("playground");
-  document.querySelector("body").appendChild(playground);
+    //remove the play and name sections
+    play.style.display = "none";
+    pvpSection.style.display = "none";
+    document.querySelector(".game-mode").style.display = "none";
 
-  for (let i = 0; i < array.length; i++) {
-    array[i] = document.createElement("div");
-    array[i].classList.add("box");
-    array[i].id = `box${i + 1}`;
-    playground.appendChild(array[i]);
+    //make the game board
+    for (let i = 1; i < 10; i++) {
+      box(i);
+    }
+  } else {
+    console.log("Put names");
   }
 });

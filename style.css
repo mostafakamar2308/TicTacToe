@@ -7,9 +7,12 @@
   box-sizing: border-box;
 }
 body {
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
 }
 h1 {
   text-align: center;
@@ -48,7 +51,7 @@ h1 {
 }
 
 .pp {
-  margin: 1em auto;
+  margin: 2em 0 1em;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -56,6 +59,7 @@ h1 {
   row-gap: 1em;
   text-align: center;
   font-size: 1.5em;
+  justify-self: center;
 }
 .pp input {
   border: none;
@@ -65,8 +69,14 @@ input:focus {
   outline: none;
 }
 
-.player {
+.player,
+.pa {
   color: #00b0ff;
+  font-size: 1.5em;
+}
+.pa {
+  margin: 2em 0 1em;
+  display: none;
 }
 .mark {
   color: #51509b;
@@ -82,7 +92,7 @@ input:focus {
   padding: 0.125em 0.5em;
   cursor: pointer;
 }
-.playground {
+.game-board {
   width: 150px;
   height: 150px;
   display: grid;
@@ -93,6 +103,9 @@ input:focus {
   width: 50px;
   height: 50px;
   border: red 1px solid;
+  text-align: center;
+  line-height: 50px;
+  font-size: 2em;
 }
 
 .player-names {
