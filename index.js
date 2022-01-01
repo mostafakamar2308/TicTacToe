@@ -61,7 +61,25 @@ let box = (id) => {
       create.classList.add("played");
     }
   });
-  return { clicking };
+
+  //Identifiy the Row of the cell
+
+  let row = Math.ceil(id / 3);
+
+  //Identifiy the Column of the cell
+  let arr = [1, 2, 3];
+  let column = id;
+  let columnIdentifier = function () {
+    if (arr.includes(column)) {
+      console.log(columnIdentifier);
+    } else {
+      column -= 3;
+      columnIdentifier();
+    }
+    return column;
+  };
+
+  return { clicking, row, columnIdentifier };
 };
 
 //Start game
