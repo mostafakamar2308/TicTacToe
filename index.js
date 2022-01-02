@@ -60,6 +60,7 @@ let box = (id) => {
       //add "played" to classlist
       create.classList.add("played");
     }
+    Win(row, columnIdentifier());
   });
 
   //Identifiy the Row of the cell
@@ -105,3 +106,29 @@ play.addEventListener("click", function () {
     console.log("Put names");
   }
 });
+
+//Function For checking winning
+function Win(row, column) {
+  //(even,even)
+  if (row % 2 == 0 && column % 2 == 0) {
+    let first = check(2);
+    let second = check(8);
+
+    if (areEqual(first, second, check(5))) {
+      console.log("you won");
+    }
+  }
+}
+
+function check(id) {
+  return document.querySelector(`#box-${id}`).textContent;
+}
+
+function areEqual() {
+  var len = arguments.length;
+  for (var i = 1; i < len; i++) {
+    if (arguments[i] === null || arguments[i] !== arguments[i - 1])
+      return false;
+  }
+  return true;
+}
