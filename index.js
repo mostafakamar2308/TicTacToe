@@ -36,7 +36,8 @@ pva.addEventListener("click", function () {
 });
 
 //Factrory for the gameboard
-let turn = 3;
+let turn = 3,
+  winner = "";
 let box = (id) => {
   //created the element
   let create = document
@@ -110,49 +111,49 @@ function Win(row, column) {
   //(even,even)
   if (row % 2 == 0 && column % 2 == 0) {
     if (areEqual(check(2), check(8), check(5))) {
-      console.log("you won");
+      winnerName();
     } else if (areEqual(check(4), check(5), check(6))) {
-      console.log("you won");
+      winnerName();
     } else if (areEqual(check(3), check(5), check(7))) {
-      console.log("you won");
+      winnerName();
     } else if (areEqual(check(1), check(5), check(9))) {
-      console.log("you won");
+      winnerName();
     }
   }
   //(even,odd)
   else if (row % 2 == 1 && column % 2 == 0) {
     if (areEqual(check(2), check(1), check(3))) {
-      console.log("you won");
+      winnerName();
     } else if (areEqual(check(8), check(7), check(9))) {
-      console.log("you won");
+      winnerName();
     } else if (areEqual(check(2), check(5), check(8))) {
-      console.log("you won");
+      winnerName();
     }
   }
   //(odd,even)
   else if (row % 2 == 0 && column % 2 == 1) {
     if (areEqual(check(4), check(1), check(7))) {
-      console.log("you won");
+      winnerName();
     } else if (areEqual(check(6), check(3), check(9))) {
-      console.log("you won");
+      winnerName();
     } else if (areEqual(check(4), check(5), check(6))) {
-      console.log("you won");
+      winnerName();
     }
   }
   //(odd,odd)
   else if (row % 2 == 1 && column % 2 == 1) {
     if (areEqual(check(1), check(2), check(3))) {
-      console.log("you won");
+      winnerName();
     } else if (areEqual(check(1), check(4), check(7))) {
-      console.log("you won");
+      winnerName();
     } else if (areEqual(check(1), check(5), check(9))) {
-      console.log("you won");
+      winnerName();
     } else if (areEqual(check(3), check(6), check(9))) {
-      console.log("you won");
+      winnerName();
     } else if (areEqual(check(9), check(8), check(7))) {
-      console.log("you won");
+      winnerName();
     } else if (areEqual(check(7), check(5), check(3))) {
-      console.log("you won");
+      winnerName();
     }
   }
 }
@@ -180,4 +181,14 @@ function areEqual() {
     }
   }
   return true;
+}
+
+//see who won
+function winnerName() {
+  if (turn % 2 == 0) {
+    winner = "X";
+  } else {
+    winner = "O";
+  }
+  console.log(`${winner} has Won`);
 }
