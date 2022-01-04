@@ -71,9 +71,7 @@ let box = (id) => {
   let arr = [1, 2, 3];
   let column = id;
   let columnIdentifier = function () {
-    if (arr.includes(column)) {
-      console.log(columnIdentifier);
-    } else {
+    if (!arr.includes(column)) {
       column -= 3;
       columnIdentifier();
     }
@@ -111,24 +109,75 @@ play.addEventListener("click", function () {
 function Win(row, column) {
   //(even,even)
   if (row % 2 == 0 && column % 2 == 0) {
-    let first = check(2);
-    let second = check(8);
-
-    if (areEqual(first, second, check(5))) {
+    if (areEqual(check(2), check(8), check(5))) {
+      console.log("you won");
+    } else if (areEqual(check(4), check(5), check(6))) {
+      console.log("you won");
+    } else if (areEqual(check(3), check(5), check(7))) {
+      console.log("you won");
+    } else if (areEqual(check(1), check(5), check(9))) {
+      console.log("you won");
+    }
+  }
+  //(even,odd)
+  else if (row % 2 == 1 && column % 2 == 0) {
+    if (areEqual(check(2), check(1), check(3))) {
+      console.log("you won");
+    } else if (areEqual(check(8), check(7), check(9))) {
+      console.log("you won");
+    } else if (areEqual(check(2), check(5), check(8))) {
+      console.log("you won");
+    }
+  }
+  //(odd,even)
+  else if (row % 2 == 0 && column % 2 == 1) {
+    if (areEqual(check(4), check(1), check(7))) {
+      console.log("you won");
+    } else if (areEqual(check(6), check(3), check(9))) {
+      console.log("you won");
+    } else if (areEqual(check(4), check(5), check(6))) {
+      console.log("you won");
+    }
+  }
+  //(odd,odd)
+  else if (row % 2 == 1 && column % 2 == 1) {
+    if (areEqual(check(1), check(2), check(3))) {
+      console.log("you won");
+    } else if (areEqual(check(1), check(4), check(7))) {
+      console.log("you won");
+    } else if (areEqual(check(1), check(5), check(9))) {
+      console.log("you won");
+    } else if (areEqual(check(3), check(6), check(9))) {
+      console.log("you won");
+    } else if (areEqual(check(9), check(8), check(7))) {
+      console.log("you won");
+    } else if (areEqual(check(7), check(5), check(3))) {
       console.log("you won");
     }
   }
 }
 
+//Determine the text in the box
+
 function check(id) {
+  if (document.querySelector(`#box-${id}`).textContent == "") {
+    return;
+  }
   return document.querySelector(`#box-${id}`).textContent;
 }
 
+//check if multiple variables are equal
 function areEqual() {
   var len = arguments.length;
   for (var i = 1; i < len; i++) {
-    if (arguments[i] === null || arguments[i] !== arguments[i - 1])
+    if (arguments[i] === null || arguments[i] !== arguments[i - 1]) {
       return false;
+    } else if (
+      arguments[i] === undefined ||
+      arguments[i] !== arguments[i - 1]
+    ) {
+      return false;
+    }
   }
   return true;
 }
