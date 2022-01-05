@@ -82,15 +82,37 @@ let box = (id) => {
   return { clicking, row, columnIdentifier };
 };
 
+//factory for players
+let player = function (name, score) {
+  return {
+    name,
+    score,
+  };
+};
+
+//Get the name of players
+let x = xPVPInput.value;
+let o = oPVPInput.value;
+
+let player1 = player(x, 0);
+let player2 = player(o, 0);
+
 //Start game
 play.addEventListener("click", function () {
   //Get the name of players
-  let x = xPVPInput.value;
-  let o = oPVPInput.value;
+  x = xPVPInput.value;
+  o = oPVPInput.value;
+
+  player1 = player(x, player1.score);
+  player2 = player(o, player2.score);
 
   if (x.trim() !== "" || o.trim() !== "") {
-    document.querySelector(".player-x").textContent = x;
-    document.querySelector(".player-o").textContent = o;
+    document.querySelector(
+      ".player-x"
+    ).textContent = `${player1.name} > ${player1.score}`;
+    document.querySelector(
+      ".player-o"
+    ).textContent = `${player2.name} > ${player2.score}`;
 
     //remove the play and name sections
     play.style.display = "none";
@@ -186,9 +208,24 @@ function areEqual() {
 //see who won
 function winnerName() {
   if (turn % 2 == 0) {
-    winner = "X";
+    winner = player1.name;
+    player1.score++;
+    document.querySelector(
+      ".player-x"
+    ).textContent = `${player1.name} > ${player1.score}`;
+    document.querySelector(
+      ".player-o"
+    ).textContent = `${player2.name} > ${player2.score}`;
   } else {
-    winner = "O";
+    winner = player2.name;
+    player2.score++;
+    document.querySelector(
+      ".player-x"
+    ).textContent = `${player1.name} > ${player1.score}`;
+    document.querySelector(
+      ".player-o"
+    ).textContent = `${player2.name} > ${player2.score}`;
   }
   console.log(`${winner} has Won`);
+  play.style.display = "block";
 }
