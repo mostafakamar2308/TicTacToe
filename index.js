@@ -66,6 +66,7 @@ let box = (id) => {
     } else {
       console.log("draw");
       create.textContent = "X";
+      play.style.display = "block";
     }
   });
 
@@ -136,7 +137,7 @@ play.addEventListener("click", function () {
       console.log("Put names");
     }
   } else {
-    turn = 3;
+    turn = 1;
     for (let i = 0; i < 9; i++) {
       document.querySelectorAll(".box")[i].textContent = "";
       document.querySelectorAll(".box")[i].classList.remove("played");
