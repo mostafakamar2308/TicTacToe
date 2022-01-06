@@ -65,6 +65,7 @@ let box = (id) => {
       Win(row, columnIdentifier());
     } else {
       console.log("draw");
+      create.textContent = "X";
     }
   });
 
