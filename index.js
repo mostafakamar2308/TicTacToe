@@ -36,7 +36,7 @@ pva.addEventListener("click", function () {
 });
 
 //Factrory for the gameboard
-let turn = 3,
+let turn = 1,
   winner = "";
 let box = (id) => {
   //created the element
@@ -48,20 +48,24 @@ let box = (id) => {
 
   //what will happen when you click on the box
   let clicking = create.addEventListener("click", function () {
-    //check if it was previosly clicked
-    if (!create.classList.contains("played")) {
-      //check what turn so if odd => "X", else "O"
-      if (turn % 2 == 1) {
-        create.textContent = "X";
+    console.log(turn);
+    if (turn < 9) {
+      //check if it was previosly clicked
+      if (!create.classList.contains("played")) {
+        //check what turn so if odd => "X", else "O"
+        if (turn % 2 == 1) {
+          create.textContent = "X";
+        } else {
+          create.textContent = "O";
+        }
         turn++;
-      } else {
-        create.textContent = "O";
-        turn++;
+        //add "played" to classlist
+        create.classList.add("played");
       }
-      //add "played" to classlist
-      create.classList.add("played");
+      Win(row, columnIdentifier());
+    } else {
+      console.log("draw");
     }
-    Win(row, columnIdentifier());
   });
 
   //Identifiy the Row of the cell
@@ -97,34 +101,46 @@ let o = oPVPInput.value;
 let player1 = player(x, 0);
 let player2 = player(o, 0);
 
+//See if the game started or not
+let started = 0;
 //Start game
 play.addEventListener("click", function () {
-  //Get the name of players
-  x = xPVPInput.value;
-  o = oPVPInput.value;
+  if (started == 0) {
+    //Get the name of players
+    x = xPVPInput.value;
+    o = oPVPInput.value;
 
-  player1 = player(x, player1.score);
-  player2 = player(o, player2.score);
+    player1 = player(x, player1.score);
+    player2 = player(o, player2.score);
 
-  if (x.trim() !== "" || o.trim() !== "") {
-    document.querySelector(
-      ".player-x"
-    ).textContent = `${player1.name} > ${player1.score}`;
-    document.querySelector(
-      ".player-o"
-    ).textContent = `${player2.name} > ${player2.score}`;
+    if (x.trim() !== "" || o.trim() !== "") {
+      document.querySelector(
+        ".player-x"
+      ).textContent = `${player1.name} > ${player1.score}`;
+      document.querySelector(
+        ".player-o"
+      ).textContent = `${player2.name} > ${player2.score}`;
 
-    //remove the play and name sections
-    play.style.display = "none";
-    pvpSection.style.display = "none";
-    document.querySelector(".game-mode").style.display = "none";
+      //remove the play and name sections
+      play.style.display = "none";
+      pvpSection.style.display = "none";
+      document.querySelector(".game-mode").style.display = "none";
 
-    //make the game board
-    for (let i = 1; i < 10; i++) {
-      box(i);
+      //make the game board
+      for (let i = 1; i < 10; i++) {
+        box(i);
+      }
+      started++;
+    } else {
+      console.log("Put names");
     }
   } else {
-    console.log("Put names");
+    turn = 3;
+    for (let i = 0; i < 9; i++) {
+      document.querySelectorAll(".box")[i].textContent = "";
+      document.querySelectorAll(".box")[i].classList.remove("played");
+    }
+    play.style.display = "none";
   }
 });
 
@@ -228,4 +244,5 @@ function winnerName() {
   }
   console.log(`${winner} has Won`);
   play.style.display = "block";
+  play.textContent = "Restart";
 }
