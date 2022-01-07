@@ -55,8 +55,10 @@ let box = (id) => {
         //check what turn so if odd => "X", else "O"
         if (turn % 2 == 1) {
           create.textContent = "X";
+          create.style.color = "#FDE1AF";
         } else {
           create.textContent = "O";
+          create.style.color = "#2D3142";
         }
         turn++;
         //add "played" to classlist

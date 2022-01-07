@@ -6,6 +6,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  --main-color: #20dfb2;
+  --second-color: #df204d;
+  --third-color: #f652a0;
+  --forth-color: #4c5270;
+}
 body {
   height: 100vh;
   width: 100vw;
@@ -13,34 +19,39 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  background-color: var(--main-color);
 }
 h1 {
   text-align: center;
   font-size: 5em;
-  color: #f3a36d;
-  text-shadow: 0 0px 4px #bd8f70;
+  color: white;
 }
 
 .game-mode {
+  width: calc(100% - 50px);
+  margin: 25px auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
 }
 .game-mode button {
   margin: 0 3em auto;
-  border: 2px solid #f3a36d;
+  border: 2px solid var(--second-color);
   padding: 0.5rem;
-  box-shadow: 0 2px #f3a36d;
+  box-shadow: 0 2px var(--second-color);
   background-color: transparent;
-  color: #f3a36d;
+  color: var(--second-color);
   font-weight: bold;
   cursor: pointer;
   transition: 0.35s;
   font-size: 1.5em;
+  width: 5em;
+  height: 5em;
 }
 .game-mode button:hover,
 .game-mode .mode-selected {
-  box-shadow: 0 10px 5px #f3a36d;
-  background-color: #f3a36d;
+  box-shadow: 0 10px 5px var(--second-color);
+  background-color: var(--second-color);
   color: white;
 }
 
@@ -63,7 +74,7 @@ h1 {
 }
 .pp input {
   border: none;
-  border-bottom: solid 2px #51509b;
+  border-bottom: solid 2px var(--second-color);
 }
 input:focus {
   outline: none;
@@ -71,7 +82,7 @@ input:focus {
 
 .player,
 .pa {
-  color: #00b0ff;
+  color: white;
   font-size: 1.5em;
 }
 .pa {
@@ -85,8 +96,7 @@ input:focus {
 .play {
   margin: 1em auto;
   font-size: 2em;
-  box-shadow: 0 10px 5px #f3a36d;
-  background-color: #f3a36d;
+  background-color: var(--second-color);
   color: white;
   border: none;
   padding: 0.125em 0.5em;
@@ -102,12 +112,12 @@ input:focus {
 .box {
   width: 150px;
   height: 150px;
-  border: red 1px solid;
+  border: var(--second-color) 1px solid;
   text-align: center;
   line-height: 150px;
   font-size: 3em;
   font-weight: bold;
-  color: #0075ff;
+  color: white;
 }
 
 .player-names {
@@ -116,6 +126,7 @@ input:focus {
   display: flex;
   width: 450px;
   justify-content: space-between;
+  color: white;
 }
 
 #modal {
@@ -131,7 +142,7 @@ input:focus {
   width: 20em;
   height: 015em;
   font-size: 2.5rem;
-  background-color: #1a6cb7;
+  background-color: var(--main-color);
   color: white;
   box-shadow: 0 0 0px 50000px rgba(0, 0, 0, 0.7);
   transition: 0.5s;
@@ -140,4 +151,29 @@ input:focus {
   border: none;
   padding: 1em;
   font-size: 1.5rem;
+}
+button {
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 450px) {
+  body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  .game-board {
+    width: 300px;
+    height: 300px;
+  }
+  .box {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+  }
+  .player-names {
+    width: 300px;
+  }
 }
