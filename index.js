@@ -64,9 +64,8 @@ let box = (id) => {
       }
       Win(row, columnIdentifier());
     } else {
-      console.log("draw");
-      create.textContent = "X";
-      play.style.display = "block";
+      modalText.textContent = "It's a draw";
+      modal.style.display = "flex";
     }
   });
 
@@ -107,6 +106,10 @@ let player2 = player(o, 0);
 let started = 0;
 //Start game
 play.addEventListener("click", function () {
+  playGame();
+});
+//playing functionality
+function playGame() {
   if (started == 0) {
     //Get the name of players
     x = xPVPInput.value;
@@ -143,8 +146,9 @@ play.addEventListener("click", function () {
       document.querySelectorAll(".box")[i].classList.remove("played");
     }
     play.style.display = "none";
+    modal.style.display = "none";
   }
-});
+}
 
 //Function For checking winning
 function Win(row, column) {
@@ -223,7 +227,9 @@ function areEqual() {
   return true;
 }
 
-//see who won
+//see who won and put it in the modal
+let modal = document.querySelector("#modal");
+let modalText = document.querySelector(".modal-Text");
 function winnerName() {
   if (turn % 2 == 0) {
     winner = player1.name;
@@ -244,7 +250,12 @@ function winnerName() {
       ".player-o"
     ).textContent = `${player2.name} > ${player2.score}`;
   }
-  console.log(`${winner} has Won`);
-  play.style.display = "block";
-  play.textContent = "Restart";
+  modal.style.display = "flex";
+  modalText.textContent = `${winner} Has Won`;
 }
+
+//restart the game
+let restart = document.querySelector("#restart");
+restart.addEventListener("click", function () {
+  playGame();
+});
